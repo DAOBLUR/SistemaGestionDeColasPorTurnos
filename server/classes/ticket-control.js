@@ -12,7 +12,7 @@ class TicketControl {
     constructor() {
         this.ultimo = 0;
         this.hoy = new Date().getDate();
-        const data = require('../data/data.json');
+        const data = require('../server/data/data.json');
         this.tickets = [];
         this.ultimos4 = [];
 
