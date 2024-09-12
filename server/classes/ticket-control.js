@@ -12,7 +12,7 @@ class TicketControl {
     constructor() {
         this.ultimo = 0;
         this.hoy = new Date().getDate();
-        const data = require('./../data/data.json');
+        const data = require('../data/data.json');
         this.tickets = [];
         this.ultimos4 = [];
 
@@ -41,7 +41,7 @@ class TicketControl {
             ultimos4: this.ultimos4
         };
         const jsonDataString = JSON.stringify(jsonData);
-        fs.writeFileSync('../server/data/data.json', jsonDataString);
+        fs.writeFileSync('../data/data.json', jsonDataString);
     }
 
     siguiente() {
