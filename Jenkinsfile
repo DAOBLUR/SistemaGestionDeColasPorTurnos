@@ -18,6 +18,8 @@ pipeline {
         }
         stage('Deploy') {
             steps {
+                sh 'dotnet run --project /apps/Email-Services/EmailServices.csproj -- k kpachac@ulasalle.edu.pe karlo'
+                
                 echo 'Deploying...'
                 script {
                     // Detener el servidor si ya está corriendo
@@ -28,7 +30,7 @@ pipeline {
                     }
                 }
                 // Iniciar el servidor
-                sh 'dotnet run --project /apps/Email-Services/EmailServices.csproj -- k kpachac@ulasalle.edu.pe karlo\${currentBuild.fullDisplayName} completed with status: \${currentBuild.currentResult}'
+                
                 
                 sh 'node server/server.js'
                 
