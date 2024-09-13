@@ -6,6 +6,21 @@ pipeline {
     stages {
         stage('Build') {
             steps {
+                script {
+                    COMMIT_HASH = sh(script: "git rev-parse --short HEAD", returnStdout: true).trim()
+                    COMMIT_MESSAGE = sh(script: "git log -1 --pretty=%B", returnStdout: true).trim()
+                    COMMIT_AUTHOR = sh(script: "git log -1 --pretty=%an", returnStdout: true).trim()
+                    COMMIT_DATE = sh(script: "git log -1 --pretty=%cd", returnStdout: true).trim()
+                }
+
+                echo """
+                Building...
+                Commit: ${COMMIT_HASH}
+                Author: ${COMMIT_AUTHOR}
+                Date: ${COMMIT_DATE}
+                Message: ${COMMIT_MESSAGE}
+                """
+
                 echo 'Building...'
                 // Comandos para compilar tu aplicación, si es necesario
             }
@@ -19,14 +34,6 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh 'dotnet run --project /apps/Email-Services/EmailServices.csproj -- k kpachac@ulasalle.edu.pe karlo'
-                
-                echo """
-                Build ${currentBuild.fullDisplayName} completed with status: ${currentBuild.currentResult}
-                Commit: ${commitHash}
-                Author: ${commitAuthor}
-                Date: ${commitDate}
-                Message: ${commitMessage}
-                """
 
                 echo 'Deploying...'
                 script {
