@@ -37,7 +37,7 @@ pipeline {
             emailext (
                 to: 'kpachac@ulasalle.edu.pe, email2@example.com',
                 subject: "Build \${currentBuild.fullDisplayName}",
-                body: "Build \${currentBuild.fullDisplayName} completed with status: \${currentBuild.currentResult}",
+                body: "New Commit: \${env.CHANGE_ID}\n\nChanges:\n\${currentBuild.changeSets, showPaths=false, format=\"%a: %r %m\\n\"}",
                 attachLog: true
             )
         }
