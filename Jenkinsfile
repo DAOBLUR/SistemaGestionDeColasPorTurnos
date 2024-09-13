@@ -16,8 +16,8 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying...'
-                // Detener el servidor si ya está corriendo
                 script {
+                    // Detener el servidor si ya está corriendo
                     def serverRunning = sh(script: "ps aux | grep 'node server/server.js' | grep -v grep", returnStatus: true) == 0
                     if (serverRunning) {
                         echo 'Stopping existing server...'
