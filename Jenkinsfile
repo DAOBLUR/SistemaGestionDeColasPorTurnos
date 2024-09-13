@@ -28,18 +28,12 @@ pipeline {
                     }
                 }
                 // Iniciar el servidor
+                
                 sh 'node server/server.js'
+                
+                sh 'cd /apps/Email-Services'
+                sh 'dotnet run k kpachac@ulasalle.edu.pe karlo'
             }
-        }
-    }
-    post {
-        always {
-            emailext (
-                to: 'kpachac@ulasalle.edu.pe, email2@example.com',
-                subject: "Build \${currentBuild.fullDisplayName}",
-                body: "New Commit: \${env.CHANGE_ID}\n\nChanges:\n\${currentBuild.changeSets, showPaths=false, format=\"%a: %r %m\\n\"}",
-                attachLog: true
-            )
         }
     }
 }
