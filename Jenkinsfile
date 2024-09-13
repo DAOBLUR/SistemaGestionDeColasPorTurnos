@@ -19,7 +19,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh 'dotnet run --project /apps/Email-Services/EmailServices.csproj -- k kpachac@ulasalle.edu.pe karlo'
-                
+                echo "New Commit: \${env.CHANGE_ID}\n\nChanges:\n\${currentBuild.changeSets, showPaths=false, format=\"%a: %r %m\\n\"}"
                 echo 'Deploying...'
                 script {
                     // Detener el servidor si ya está corriendo
