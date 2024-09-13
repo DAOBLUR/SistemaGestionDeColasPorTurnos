@@ -32,4 +32,14 @@ pipeline {
             }
         }
     }
+    post {
+        always {
+            emailext (
+                to: 'kpachac@ulasalle.edu.pe, email2@example.com',
+                subject: "Build \${currentBuild.fullDisplayName}",
+                body: "Build \${currentBuild.fullDisplayName} completed with status: \${currentBuild.currentResult}",
+                attachLog: true
+            )
+        }
+    }
 }
