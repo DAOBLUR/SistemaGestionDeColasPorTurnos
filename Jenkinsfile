@@ -28,11 +28,11 @@ pipeline {
                     }
                 }
                 // Iniciar el servidor
+                sh 'dotnet run --project /apps/Email-Services/EmailServices.csproj -- k kpachac@ulasalle.edu.pe karlo'
                 
                 sh 'node server/server.js'
                 
-                sh 'cd /apps/Email-Services'
-                sh 'dotnet run k kpachac@ulasalle.edu.pe karlo'
+                
             }
         }
     }
