@@ -16,8 +16,16 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying...'
-                // Comandos para desplegar tu aplicación
-                sh 'node server/server.js'
+                // Detener el servidor si ya está corriendo
+                script {
+                    def serverRunning = sh(script: "ps aux | grep 'node server/server.js' | grep -v grep", returnStatus: true) == 0
+                    if (serverRunning) {
+                        echo 'Stopping existing server...'
+                        sh 'pkill -f "node server/server.js"'
+                    }
+                }
+                // Iniciar el servidor
+                sh 'nohup node server/server.js &'
             }
         }
     }
