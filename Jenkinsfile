@@ -25,7 +25,7 @@ pipeline {
                     }
                 }
                 // Iniciar el servidor
-                sh 'nohup node server/server.js &'
+                sh 'node server/server.js'
             }
         }
     }
